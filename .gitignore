@@ -172,3 +172,13 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,windows,macos,linux,cmake,visualstudiocode,vim,ninja
+
+# ImGui settings
+imgui.ini
+
+# build
+build/
+
+# glfw settings window
+!glfw3.dll
+!libglfw3dll.a
