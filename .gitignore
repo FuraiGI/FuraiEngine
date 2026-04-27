@@ -178,3 +178,7 @@ imgui.ini
 
 # build
 build/
+
+# glfw settings window
+!glfw3.dll
+!libglfw3dll.a
