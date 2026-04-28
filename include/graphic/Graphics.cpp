@@ -1,6 +1,6 @@
 #include <furai.hpp>
 
-Furai::Graphics::Graphics(){
+FuraiEngine::Graphics::Graphics(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share){
     if (!glfwInit()){
         throw std::runtime_error("Failed to initialize GLFW");
     }
@@ -9,13 +9,16 @@ Furai::Graphics::Graphics(){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    CreateWindow(width, height, title, monitor, share);
+    ViewPort(0, 0, width, height);
 }
 
-Furai::Graphics::~Graphics(){
+FuraiEngine::Graphics::~Graphics(){
     glfwTerminate();
 }
 
-void Furai::Graphics::CreateWindow(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share){
+void FuraiEngine::Graphics::CreateWindow(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share){
     _window = glfwCreateWindow(width, height, title.c_str(), monitor, share);
 
     if(_window == NULL){
@@ -32,14 +35,23 @@ void Furai::Graphics::CreateWindow(int width, int height, std::string title, GLF
     gui_comp.InitGUIComponent(_window);
 }
 
-void Furai::Graphics::ViewPort(GLint x, GLint y, GLsizei width, GLsizei height){
+void FuraiEngine::Graphics::ViewPort(GLint x, GLint y, GLsizei width, GLsizei height){
     glViewport(x, y, width, height);
 }
 
-void Furai::Graphics::SwapBuffers(){
+void FuraiEngine::Graphics::SwapBuffers(){
     glfwSwapBuffers(_window);
 }
 
-int Furai::Graphics::WindowShouldClose(){
+void FuraiEngine::Graphics::ClearColor(float r, float g, float b, float a){
+    glClearColor(r, g, b, a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void FuraiEngine::Graphics::PollEvents(){
+    glfwPollEvents();
+}
+
+int FuraiEngine::Graphics::WindowShouldClose(){
     return glfwWindowShouldClose(_window);
 }

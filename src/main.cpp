@@ -10,21 +10,15 @@ namespace DebugMenu{
     }
 }
 
-int main()
-{
-    Furai::Graphics graphics;
-
-    graphics.CreateWindow(800, 600, "test-app", NULL, NULL);
-
-    graphics.ViewPort(0, 0, 800, 600);
+int main(){
+    FuraiEngine::Graphics graphics(800, 600, "test-app", NULL, NULL);
 
     float clear_color[4] = { 0.2f, 0.3f, 0.3f, 0.1f };
+    
+    MAIN_LOOP(graphics){
+        graphics.PollEvents();
 
-    while(!graphics.WindowShouldClose()){
-        glfwPollEvents();
-
-        glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
-        glClear(GL_COLOR_BUFFER_BIT);
+        graphics.ClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 
         graphics.gui_comp.BeginGUI();
 
