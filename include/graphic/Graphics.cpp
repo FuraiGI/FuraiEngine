@@ -1,5 +1,9 @@
 #include <furai.hpp>
 
+void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
+}
+
 FuraiEngine::Graphics::Graphics(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share){
     if (!glfwInit()){
         throw std::runtime_error("Failed to initialize GLFW");
@@ -11,7 +15,6 @@ FuraiEngine::Graphics::Graphics(int width, int height, std::string title, GLFWmo
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     CreateWindow(width, height, title, monitor, share);
-    ViewPort(0, 0, width, height);
 }
 
 FuraiEngine::Graphics::~Graphics(){
@@ -26,6 +29,9 @@ void FuraiEngine::Graphics::CreateWindow(int width, int height, std::string titl
     }
 
     glfwMakeContextCurrent(_window);
+
+    // フレームバッファのコールバック
+    glfwSetFramebufferSizeCallback(_window, FramebufferSizeCallback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         throw std::runtime_error("Failed to initialize GLAD");
@@ -54,4 +60,15 @@ void FuraiEngine::Graphics::PollEvents(){
 
 int FuraiEngine::Graphics::WindowShouldClose(){
     return glfwWindowShouldClose(_window);
+}
+
+float FuraiEngine::Graphics::GetAspectRatio() {
+    int width, height;
+
+    glfwGetFramebufferSize(_window, &width, &height);
+    
+    if(height == 0){
+        return 1.0f;
+    }
+    return (float)width / (float)height;
 }

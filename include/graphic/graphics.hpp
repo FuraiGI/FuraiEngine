@@ -24,12 +24,13 @@ namespace FuraiEngine{
         public:
             GUIComponent gui_comp;
 
-            void CreateWindow(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share);        
-            void ViewPort(GLint x, GLint y, GLsizei width, GLsizei height);
-            void ClearColor(float r, float g, float b, float a);
-            void SwapBuffers();
-            void PollEvents();
-            int WindowShouldClose();
+            void  CreateWindow(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share);        
+            void  ViewPort(GLint x, GLint y, GLsizei width, GLsizei height);
+            void  ClearColor(float r, float g, float b, float a);
+            void  PollEvents();
+            void  SwapBuffers();
+            float GetAspectRatio();
+            int   WindowShouldClose();
 
             Graphics(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share);
             ~Graphics();

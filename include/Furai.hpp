@@ -8,5 +8,9 @@
 
 // graphics
 #include <graphic/graphics.hpp>
+#include <graphic/Shader.hpp>
+#include <graphic/Mesh.hpp>
+#include <graphic/shape/shape.hpp>
+#include <paths.hpp>
 
 #endif // FURAI_HPP
