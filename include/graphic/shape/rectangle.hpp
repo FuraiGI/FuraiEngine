@@ -5,10 +5,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <graphic/Mesh.hpp>
 #include <graphic/shader.hpp>
+#include <graphic/shape/BaseShape.hpp>
 
 namespace FuraiEngine{
     namespace Shape{
-        class Rectangle{
+        class Rectangle : public Shape{
             private:
                 Mesh _mesh;
             public:
@@ -18,7 +19,7 @@ namespace FuraiEngine{
                 
                 Rectangle(float width, float height);
                 
-                void Draw(const Shader& shader) const;
+                void Draw(const Shader& shader) const override;
             };
 
     }

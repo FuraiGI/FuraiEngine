@@ -1,10 +1,12 @@
 #ifndef FURAI_HPP
 #define FURAI_HPP
 
+#define MAIN_LOOP(obj)  while(!obj.WindowShouldClose())
+
+// usually
 #include <iostream>
 #include <stdexcept>
-
-#define MAIN_LOOP(obj)  while(!obj.WindowShouldClose())
+#include <memory>
 
 // graphics
 #include <graphic/graphics.hpp>
