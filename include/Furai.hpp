@@ -11,6 +11,10 @@
 #include <graphic/Shader.hpp>
 #include <graphic/Mesh.hpp>
 #include <graphic/shape/shape.hpp>
+#include <graphic/shape/polygon.hpp>
 #include <paths.hpp>
+
+// input
+#include <input/input.hpp>
 
 #endif // FURAI_HPP

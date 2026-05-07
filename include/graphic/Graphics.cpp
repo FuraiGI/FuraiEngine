@@ -4,7 +4,18 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-FuraiEngine::Graphics::Graphics(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share){
+void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    if (ImGui::GetIO().WantCaptureMouse) return;
+    FuraiEngine::Graphics* graphics = static_cast<FuraiEngine::Graphics*>(glfwGetWindowUserPointer(window));
+    if (graphics) {
+        // ★ graphics->cameraZoom ではなく、graphics->camera.Zoom にアクセスする
+        graphics->camera.Zoom += static_cast<float>(yoffset) * 0.1f;
+        if (graphics->camera.Zoom < 0.1f) graphics->camera.Zoom = 0.1f;
+        if (graphics->camera.Zoom > 10.0f) graphics->camera.Zoom = 10.0f;
+    }
+}
+
+FuraiEngine::Graphics::Graphics(int width, int height, std::string title, GLFWmonitor *monitor, GLFWwindow *share): camera(1.0f){
     if (!glfwInit()){
         throw std::runtime_error("Failed to initialize GLFW");
     }
@@ -71,4 +82,8 @@ float FuraiEngine::Graphics::GetAspectRatio() {
         return 1.0f;
     }
     return (float)width / (float)height;
+}
+
+void FuraiEngine::Graphics::CloseWindow() {
+    glfwSetWindowShouldClose(_window, GLFW_TRUE);
 }

@@ -28,7 +28,10 @@ set(FURAI_GRAPHIC_SOURCE
     include/graphic/graphics.cpp
     include/graphic/shader.cpp
     include/graphic/mesh.cpp
+    include/graphic/camera.cpp
     include/graphic/shape/rectangle.cpp
+    include/graphic/shape/polygon.cpp
+    include/input/input.cpp
 )
 
 add_executable(app
