@@ -23,7 +23,16 @@ set(IMGUI_BACKENDS
     ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
-file(GLOB FURAI_GRAPHIC_SOURCE "include/graphic/*.cpp")
+set(FURAI_GRAPHIC_SOURCE
+    include/graphic/GUIComponent.cpp
+    include/graphic/graphics.cpp
+    include/graphic/shader.cpp
+    include/graphic/mesh.cpp
+    include/graphic/camera.cpp
+    include/graphic/shape/rectangle.cpp
+    include/graphic/shape/polygon.cpp
+    include/input/input.cpp
+)
 
 add_executable(app
     src/main.cpp 
@@ -52,5 +61,10 @@ add_custom_command(TARGET app POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     "${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3.dll"
     $<TARGET_FILE_DIR:app>
+
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/graphic/shaders"
+    $<TARGET_FILE_DIR:app>/include/graphic/shaders
+
     COMMENT "Copying glfw3.dll to binary directory..."
 )
