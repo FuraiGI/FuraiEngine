@@ -8,6 +8,9 @@
 #include <stdexcept>
 #include <memory>
 
+// core
+#include <core/time.hpp>
+
 // graphics
 #include <graphic/graphics.hpp>
 #include <graphic/Shader.hpp>

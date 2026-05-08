@@ -34,6 +34,8 @@ int main()
     
     MAIN_LOOP(graphics){
         graphics.PollEvents();
+        
+        FE::Time::Update();
         graphics.ClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 
         graphics.camera.AspectRatio = graphics.GetAspectRatio();
